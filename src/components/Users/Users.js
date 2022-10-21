@@ -1,4 +1,9 @@
-import { faDeleteLeft, faRefresh, faTrash, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDeleteLeft,
+  faRefresh,
+  faTrash,
+  faTrashAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
@@ -11,6 +16,24 @@ const Users = () => {
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, []);
+
+  const handleDelete = (id) => {
+    if (window.confirm("Press OK to Confirm Delete")) {
+      const url = `http://localhost:5000/users/${id}`;
+      fetch(url, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            const remaining = users.filter((user) => user._id !== id);
+            setUsers(remaining);
+          }
+        });
+    }
+  };
+
+  let id = 1;
   return (
     <div>
       <Table striped bordered hover>
@@ -24,22 +47,28 @@ const Users = () => {
           </tr>
         </thead>
         <tbody>
-            {
-                users.map(user => {
-                    return (
-                        <tr key = {user.id}>
-                        <td>{user.id}</td>
-                        <td>{user.name}</td>
-                        <td>{user.email}</td>
-                        <td>{user.phone}</td>
-                        <td>
-                           <Button variant='outline-primary'>Delete  <FontAwesomeIcon icon={faTrashAlt} /></Button> {' /'}
-                            <Button variant='outline-primary ms-2'>Update <FontAwesomeIcon icon={faRefresh} /></Button>
-                        </td>
-                    </tr>
-                    )
-                })
-            }
+          {users.map((user, index) => {
+            return (
+              <tr key={index}>
+                <td>{id++}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.phone}</td>
+                <td>
+                  <Button
+                    onClick={() => handleDelete(user._id)}
+                    variant="outline-primary"
+                  >
+                    Delete <FontAwesomeIcon icon={faTrashAlt} />
+                  </Button>{" "}
+                  {" /"}
+                  <Button variant="outline-primary ms-2">
+                    Update <FontAwesomeIcon icon={faRefresh} />
+                  </Button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
     </div>
