@@ -12,10 +12,11 @@ function App() {
     <div className="App">
       <Headers></Headers>
       <Routes>
+        <Route path='/' element={<Users></Users>} />
         <Route path='/home' element={<Home></Home>} />
         <Route path='/users' element={<Users></Users>}/>
         <Route path='/addUser' element={<AddUser></AddUser>} />
-        <Route path='update/:updateId' element={<Update></Update>} />
+        <Route path='/update/:id' element={<Update></Update>} />
       </Routes>
     </div>
   );

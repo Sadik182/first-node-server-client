@@ -62,7 +62,7 @@ const Users = () => {
                     Delete <FontAwesomeIcon icon={faTrashAlt} />
                   </Button>{" "}
                   {" /"}
-                  <Link to={`update/${user._id}`}><Button variant="outline-primary ms-2">
+                  <Link to={`/update/${user._id}`}><Button variant="outline-primary ms-2">
                     Update <FontAwesomeIcon icon={faRefresh} />
                   </Button></Link>
                 </td>

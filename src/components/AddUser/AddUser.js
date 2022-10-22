@@ -1,11 +1,13 @@
 import React, { useRef } from "react";
 import { Button, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import './AddUser.css'
 
 const AddUser = () => {
     const nameRef = useRef('');
     const emailRef = useRef('');
     const phoneRef = useRef('');
+    const navigate = useNavigate()
 
     const handleAddUser = e => {
         e.preventDefault();
@@ -24,10 +26,12 @@ const AddUser = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             if(data) {
-              data.reset()
+              alert('Users Added Successfully!');
+              navigate('/users');
+              e.target.reset();
             }
+
         })
     }
   return (
