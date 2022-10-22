@@ -1,15 +1,15 @@
 import {
-  faDeleteLeft,
   faRefresh,
-  faTrash,
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const {updateId} = useParams();
 
   useEffect(() => {
     fetch("http://localhost:5000/users")
@@ -62,9 +62,9 @@ const Users = () => {
                     Delete <FontAwesomeIcon icon={faTrashAlt} />
                   </Button>{" "}
                   {" /"}
-                  <Button variant="outline-primary ms-2">
+                  <Link to={`update/${user._id}`}><Button variant="outline-primary ms-2">
                     Update <FontAwesomeIcon icon={faRefresh} />
-                  </Button>
+                  </Button></Link>
                 </td>
               </tr>
             );

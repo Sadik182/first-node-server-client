@@ -5,6 +5,7 @@ import Home from './components/Home/Home';
 import Users from './components/Users/Users';
 import AddUser from './components/AddUser/AddUser';
 import Headers from './components/Headers/Headers';
+import Update from './components/Update/Update';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path='/home' element={<Home></Home>} />
         <Route path='/users' element={<Users></Users>}/>
         <Route path='/addUser' element={<AddUser></AddUser>} />
+        <Route path='update/:updateId' element={<Update></Update>} />
       </Routes>
     </div>
   );
